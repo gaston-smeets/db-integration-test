@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="devgs" id="202302191004100" contextFilter="test">
+        <insert tableName="book" schemaName="bookstore">
+            <column name="title" value="The Pragmatic Programmer"/>
+            <column name="isbn" value="9780135957059"/>
+            <column name="language_code" value="en"/>
+        </insert>
+        <insert tableName="book" schemaName="bookstore">
+            <column name="title" value="Design Patterns"/>
+            <column name="isbn" value="9780201633610"/>
+            <column name="language_code" value="en"/>
+        </insert>
+        <insert tableName="author" schemaName="bookstore">
+            <column name="first_name" value="Erich"/>
+            <column name="last_name" value="Gamma"/>
+        </insert>
+        <insert tableName="author" schemaName="bookstore">
+            <column name="first_name" value="Richard"/>
+            <column name="last_name" value="Helm"/>
+        </insert>
+        <insert tableName="author" schemaName="bookstore">
+            <column name="first_name" value="David"/>
+            <column name="last_name" value="Thomas"/>
+        </insert>
+        <insert tableName="author" schemaName="bookstore">
+            <column name="first_name" value="Andrew"/>
+            <column name="last_name" value="Hunt"/>
+        </insert>
+
+        <insert tableName="book_author" schemaName="bookstore">
+            <column name="book_id" valueComputed="(SELECT id from bookstore.book where isbn='9780201633610')"/>
+            <column name="author_id" valueComputed="(SELECT id from bookstore.author where last_name='Gamma')"/>
+        </insert>
+        <insert tableName="book_author" schemaName="bookstore">
+            <column name="book_id" valueComputed="(SELECT id from bookstore.book where isbn='9780201633610')"/>
+            <column name="author_id" valueComputed="(SELECT id from bookstore.author where last_name='Helm')"/>
+        </insert>
+        <insert tableName="book_author" schemaName="bookstore">
+            <column name="book_id" valueComputed="(SELECT id from bookstore.book where isbn='9780135957059')"/>
+            <column name="author_id" valueComputed="(SELECT id from bookstore.author where last_name='Thomas')"/>
+        </insert>
+        <insert tableName="book_author" schemaName="bookstore">
+            <column name="book_id" valueComputed="(SELECT id from bookstore.book where isbn='9780135957059')"/>
+            <column name="author_id" valueComputed="(SELECT id from bookstore.author where last_name='Hunt')"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
